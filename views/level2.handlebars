@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/timeout.js"></script>
+
+    {{!--
+    <link rel="stylesheet" href="/css/skeleton.css"> --}}
+
+    {{!--
+    <link rel="stylesheet" href="../public/style.css"> --}}
+
+    <title>Document</title>
+    <style>
+        body {
+            background-color: lightseagreen;
+            color: whitesmoke;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .overall {
+            margin: auto;
+            width: 50%;
+            background-color: crimson;
+            text-align: center;
+            justify-content: center;
+            align-content: center;
+            border: solid black;
+            border-radius: 25%;
+            background-image: linear-gradient(rgba(6, 4, 110, 0.8), rgba(143, 163, 142, 0.8)), url(./—Pngtree—cool\ technology\ sense\ information\ technology_1046698.jpg);
+        }
+
+        .back1 a button {
+            width: 150px;
+            height: 50px;
+            background-color: whitesmoke;
+            border: 1px solid wheat;
+            color: black;
+            outline: none;
+            transition: .6s ease;
+            border-radius: 25px;
+            margin: 9%;
+        }
+
+        .allOptions {
+            display: flex;
+        }
+
+        .back1 a button:hover {
+            cursor: pointer;
+            background-color: rgb(238, 232, 221);
+            color: black;
+            box-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white;
+            font-weight: bold;
+        }
+
+        .button button {
+            width: 100px;
+            height: 50px;
+            background-color: whitesmoke;
+            border: 1px solid wheat;
+            color: black;
+            outline: none;
+            transition: .6s ease;
+            border-radius: 25px;
+        }
+    </style>
+
+
+
+
+</head>
+
+<body>
+    <div class="overall">
+
+        <h2>LEVEL2</h2>
+        <form action="Challenge" method="POST">
+
+            <div class="allOptions">
+                <div class="option1">
+
+
+
+                </div>
+                <div class="option2">
+
+
+
+                </div>
+                <div class="option3">
+
+
+                </div>
+        </form>
+    </div>
+
+    {{#each levels}}
+    <ul>
+        <a href="/counter/{{game}}">{{game}}</a>
+    </ul>
+    {{/each}}
+
+
+
+    <div class="back1">
+        <a href="/"> <button>Home</button></a>
+    </div>
+
+    <form action="./challenge" method="POST">
+        <div class="button">
+            <button type="submit" name="next">Next</button>
+        </div>
+    </form>
+
+
+
+
+    </div>
+
+</body>
+
+</html>
