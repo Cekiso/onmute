@@ -26,7 +26,13 @@ body {
         transition: .6s ease;
         border-radius: 25px;
     }
+    .button button:hover {
+        cursor: pointer;
+        background-color: rgb(238, 232, 221);
+        color: black;
+        box-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white;
+        font-weight: bold;
+    }
     .startBTN{
         padding: 2em;
     }
-    

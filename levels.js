@@ -1,26 +1,23 @@
 module.exports = function Onmute(pool) {
 
+	var startMessage;
+	
 	async function createGame(levelName) {
+		 
+        try {
+            
+            return startMessage;
 
-		const result = await pool.query(`insert into levels (level_name) values ($1) returning id`, [levelName]);
-		if (result.rowCount === 1) {
-			return result.rows[0].id;
-		}
-		return null;
+        } catch (error) {
+
+        }
+
+    
 	}
-
-	async function listShops() {
-		const result = await pool.query(`select * from shop`);
-		return result.rows;
+	return{
+		createGame
 	}
-
-	async function dealsForShop(shopId) {
-		const result = await pool.query(`select * from avo_deal where shop_id = $1`, [shopId]);
-		return result.rows;
-	}
-    return{
-        createGame,
-        Onmute
-
-    }
 }
+		
+
+	

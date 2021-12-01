@@ -61,7 +61,7 @@ app.post('/challenge', async function(req, res){
 
 
 
-const PORT = process.env.PORT || 4040;
+const PORT = process.env.PORT || 4050;
 app.listen(PORT, function () {
 	console.log(`GameApp started on port ${PORT}`)
 })
