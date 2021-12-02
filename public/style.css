@@ -14,8 +14,8 @@ body {
     align-content: center;
     border: solid black;
     /* border-radius: 25%; */
-    /* background-image: linear-gradient(rgba(6, 4, 110, 0.8), rgba(143, 163, 142, 0.8)), url(./—Pngtree—cool\ technology\ sense\ information\ technology_1046698.jpg); */
-    background-image: img('.jpg');
+    background-image: linear-gradient(rgba(247, 247, 252, 0.034), rgba(234, 240, 233, 0.014)), url(./Sign-Language.jpg);
+    background-repeat: no repeat;
 }
 
 .button button {

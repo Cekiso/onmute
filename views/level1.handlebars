@@ -91,8 +91,8 @@
 
         <h2>LEVEL1</h2>
         <form action="Level1" method="POST">
-            <div class="question" name="question">Please show me Yes{{challenge}}</div>
-            
+            <div class="question" name="question">Please show me <span class="challenge"></span></div>
+
             <button type="button" onclick="init()" class="start">Start</button>
             <button type="button" onclick="stop()" class="start">stop</button>
 
@@ -105,12 +105,36 @@
             <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
             <script
                 src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+                integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+                crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script type="text/javascript">
                 // More API functions here:
                 // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
                 // the link to your model provided by Teachable Machine export panel
                 const URL = "https://teachablemachine.withgoogle.com/models/9RE6vl80w/";
                 let model, webcam, ctx, labelContainer, maxPredictions, showResults, button;
+
+                let challengeElem = document.querySelector('.challenge');
+
+                let currentSign;
+
+                function getCurrentSign(username) {
+                    axios.get('/challenge/' + username)
+                        .then(function (result) {
+                            console.log(result)
+                            challengeElem.innerHTML = result.data.challenge
+                            currentSign = result.data.challenge
+                        })
+                }
+
+                getCurrentSign('Mila')
+
+                function submitSign(username, sign) {
+                    return axios.post('/submit/sign/' + username)
+                }
+
+
                 async function init() {
                     const modelURL = URL + "model.json";
                     const metadataURL = URL + "metadata.json";
@@ -137,58 +161,51 @@
                     for (let i = 0; i < maxPredictions; i++) { // and class labels
                         labelContainer.appendChild(document.createElement("div"));
                     }
+
                 }
                 async function loop(timestamp) {
                     webcam.update(); // update the webcam frame
                     await predict();
                     window.requestAnimationFrame(loop);
                 }
-                /////////////////////////////////////////
-                  async function challenge(id) {
-                 await pool.query(`select challenge_name from challenge where id=$1 `,[id]);
-                // return challenge_name.rows;
-                 return 'it working';
 
-    }
                 async function predict() {
-                    let maxPredi = 0;
-                    let classNameLabel;
+
                     // Prediction #1: run input through posenet
                     // estimatePose can take in an image, video or canvas html element
                     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
                     // Prediction 2: run input through teachable machine classification model
                     const prediction = await model.predict(posenetOutput);
 
+                    // get the max prediction
+
+                    let maxPredi = 0;
+                    let classNameLabel;
+
                     for (let props of prediction) {
                         if (props.probability > maxPredi) {
                             maxPredi = props.probability
                             classNameLabel = props.className
-
-                            console.log(maxPredi.toFixed(2) + 'maxPredict');
-                            console.log(classNameLabel + "uuuuuuuuuuu");
-                            // classNameLabel = 'Yes'
-
-                            if (classNameLabel === 'Yes' && maxPredi >= 0.88) {
-                                showResults.innerHTML = 'You are correct'
-                                stop()
-
-                            }
-                            if (classNameLabel === 'Finish') {
-                                showResults.innerHTML = 'Finish'
-
-                            }
-                            if (classNameLabel === 'Me') {
-                                showResults.innerHTML = 'Me'
-
-                            }
-                            if (classNameLabel === 'More') {
-                                showResults.innerHTML = 'More'
-
-                            }
-
                         }
-                        console.log(showResults.innerHTML + "qqqqqqqqqq");
+                    }   
+
+                    console.log({maxPredi, classNameLabel})
+
+                    if (classNameLabel === currentSign && maxPredi >= 0.88) {
+                        showResults.innerHTML = currentSign;
+                        // update that the current sign was identofied by the user
+
+                        showResults.innerHTML = 'You are correct'
+
+
+                        submitSign('Mila')
+                            .then(getCurrentSign('Mila'))
+
+
                     }
+
+                    console.log(showResults.innerHTML + "qqqqqqqqqq");
+
                     //     const classPrediction =
                     //         prediction[i].className + ": " + prediction[i].probability.toFixed(2);
                     labelContainer.innerHTML = classNameLabel;
