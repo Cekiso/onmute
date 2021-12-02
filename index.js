@@ -21,33 +21,42 @@ app.set('view engine', 'handlebars')
 
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL || 'postgresql://codex:pg123@localhost:5432/game',
-    ssl: {rejectUnauthorized: false}
+    connectionString: process.env.DATABASE_URL || 'postgresql://nkully:nkully@localhost:5432/game',
+    ssl: { rejectUnauthorized: false }
 });
+const gaming = Game(pool);
 
-app.get('/', function (req, res) {
-	res.render('index')
+
+app.get('/', async function(req, res) {
+    res.render('index', {
+        question: await gaming.challenge()
+    })
+
 });
-app.post('/level1', async function(req, res){
-	try {
-		res.render('level1')
-	} catch (error) {
-		console.log(error)
-	}
+app.post('/level1', async function(req, res) {
+    var question = req.body.question;
+    await gaming.challenge()
+
+    try {
+        res.render('level1', {})
+
+    } catch (error) {
+        console.log(error)
+    }
 })
-app.post('/level2', async function(req, res){
-	try {
-		res.render('level2')
-	} catch (error) {
-		console.log(error)
-	}
+app.post('/level2', async function(req, res) {
+    try {
+        res.render('level2')
+    } catch (error) {
+        console.log(error)
+    }
 })
-app.post('/challenge', async function(req, res){
-	try {
-		res.render('challenge')
-	} catch (error) {
-		console.log(error)
-	}
+app.post('/challenge', async function(req, res) {
+    try {
+        res.render('challenge')
+    } catch (error) {
+        console.log(error)
+    }
 })
 
 
@@ -62,6 +71,6 @@ app.post('/challenge', async function(req, res){
 
 
 const PORT = process.env.PORT || 4050;
-app.listen(PORT, function () {
-	console.log(`GameApp started on port ${PORT}`)
+app.listen(PORT, function() {
+    console.log(`GameApp started on port ${PORT}`)
 })

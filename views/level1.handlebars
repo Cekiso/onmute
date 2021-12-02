@@ -91,7 +91,8 @@
 
         <h2>LEVEL1</h2>
         <form action="Level1" method="POST">
-            <div class="question">Please show me YES!!!</div>
+            <div class="question" name="question">{{challenge}}</div>
+            
             <button type="button" onclick="init()" class="start">Start</button>
             <button type="button" onclick="stop()" class="start">stop</button>
 
@@ -142,6 +143,13 @@
                     await predict();
                     window.requestAnimationFrame(loop);
                 }
+                /////////////////////////////////////////
+                  async function challenge(id) {
+                 await pool.query(`select challenge_name from challenge where id=$1 `,[id]);
+                // return challenge_name.rows;
+                 return 'it working';
+
+    }
                 async function predict() {
                     let maxPredi = 0;
                     let classNameLabel;
@@ -150,6 +158,7 @@
                     const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
                     // Prediction 2: run input through teachable machine classification model
                     const prediction = await model.predict(posenetOutput);
+
                     for (let props of prediction) {
                         if (props.probability > maxPredi) {
                             maxPredi = props.probability
