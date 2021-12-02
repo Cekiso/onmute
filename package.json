@@ -11,11 +11,12 @@
     "license": "ISC",
     "dependencies": {
         "chalk": "^5.0.0",
+        "express": "^4.17.1",
         "handlebars": "^4.7.7",
         "nodemon": "^2.0.15",
-        "pg": "^8.7.1"
+        "pg": "^8.7.1",
+        "pool": "^0.4.1"
     },
-    "devDependencies": {},
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Cekiso/onmute.git"
