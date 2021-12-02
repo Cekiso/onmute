@@ -16,7 +16,7 @@ app.use(express.static('public'));
 
 // add more middleware to allow for templating support
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 
@@ -60,7 +60,26 @@ app.post('/challenge', async function(req, res) {
 })
 
 
+app.get('/challenge/:username', function(req, res) {
 
+    const username = req.params.username;
+    const sql = `select challenge_name from player 
+				 join challenge on challenge.id = player.challenge_id
+				 where player_name = $1`
+
+    // ? how do I execute my select query?
+
+    const result = await pool.query(`select challenge_name from player 
+	               join challenge on challenge.id = player.challenge_id
+	               where player_name = $1`, [username])
+
+
+    res.json({
+
+    });
+
+
+})
 
 
 
