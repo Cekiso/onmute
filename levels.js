@@ -9,7 +9,7 @@ module.exports = function Onmute(pool) {
             return startMessage;
 
         } catch (error) {
-
+            console.log(error)
         }
 
 
