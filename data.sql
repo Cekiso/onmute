@@ -9,6 +9,5 @@ foreign key (challenge_id) references challenge (id)
 
 CREATE TABLE challenge(
     id serial not null primary key,
-    challenge_id int,
     challenge_name text
-)
+);

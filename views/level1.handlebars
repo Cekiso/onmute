@@ -8,9 +8,7 @@
     <script src="/timeout.js"></script>
 
     {{!--
-    <link rel="stylesheet" href="/css/skeleton.css"> --}}
-
-    {{!--
+    <link rel="stylesheet" href="/css/skeleton.css"> --}} {{!--
     <link rel="stylesheet" href="../public/style.css"> --}}
 
     <title>Document</title>
@@ -75,10 +73,6 @@
             box-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white;
             font-weight: bold;
         }
-
-        .question text {
-            color: solid red;
-        }
     </style>
 
 
@@ -88,35 +82,30 @@
 
 <body>
     <div class="overall">
-
         <h2>LEVEL1</h2>
         <form action="Level1" method="POST">
             <div class="question" name="question">Please show me <span class="challenge"></span></div>
-
             <button type="button" onclick="init()" class="start">Start</button>
             <button type="button" onclick="stop()" class="start">stop</button>
-
             <div><canvas id="canvas"></canvas></div>
             <div id="label-container"></div>
             <div class="results"></div>
+            <div class="points"></div>
             <div class="button">
                 <a href="./level2"> <button>Next</button></a>
             </div>
             <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
-            <script
-                src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
-                integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+ integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
                 crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script type="text/javascript">
                 // More API functions here:
                 // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
                 // the link to your model provided by Teachable Machine export panel
-                const URL = "https://teachablemachine.withgoogle.com/models/9RE6vl80w/";
+                const URL = "https://teachablemachine.withgoogle.com/models/ujg-F0UkQ/";
                 let model, webcam, ctx, labelContainer, maxPredictions, showResults, button;
-
                 let challengeElem = document.querySelector('.challenge');
-
                 let currentSign;
 
                 function getCurrentSign(username) {
@@ -127,14 +116,11 @@
                             currentSign = result.data.challenge
                         })
                 }
-
                 getCurrentSign('Mila')
 
                 function submitSign(username, sign) {
                     return axios.post('/submit/sign/' + username)
                 }
-
-
                 async function init() {
                     const modelURL = URL + "model.json";
                     const metadataURL = URL + "metadata.json";
@@ -152,67 +138,61 @@
                     window.requestAnimationFrame(loop);
                     // append/get elements to the DOM
                     const canvas = document.getElementById("canvas");
-                    canvas.width = size; canvas.height = size;
+                    const score = document.querySelector('.points')
+                    canvas.width = size;
+                    canvas.height = size;
                     ctx = canvas.getContext("2d");
+                    
                     labelContainer = document.getElementById("label-container");
                     showResults = document.querySelector('.results')
                     button = document.querySelector('.button')
-                    // showResults.innerHTML = "You are  correct "
                     for (let i = 0; i < maxPredictions; i++) { // and class labels
                         labelContainer.appendChild(document.createElement("div"));
                     }
-
                 }
                 async function loop(timestamp) {
                     webcam.update(); // update the webcam frame
                     await predict();
                     window.requestAnimationFrame(loop);
                 }
-
+                let reward = 0;
                 async function predict() {
-
                     // Prediction #1: run input through posenet
                     // estimatePose can take in an image, video or canvas html element
-                    const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
+                    const {
+                        pose,
+                        posenetOutput
+                    } = await model.estimatePose(webcam.canvas);
                     // Prediction 2: run input through teachable machine classification model
                     const prediction = await model.predict(posenetOutput);
 
                     // get the max prediction
-
                     let maxPredi = 0;
                     let classNameLabel;
-
                     for (let props of prediction) {
                         if (props.probability > maxPredi) {
                             maxPredi = props.probability
                             classNameLabel = props.className
                         }
-                    }   
-
-                    console.log({maxPredi, classNameLabel})
-
+                    }
+                    console.log({
+                        maxPredi,
+                        classNameLabel
+                    })
                     if (classNameLabel === currentSign && maxPredi >= 0.88) {
                         showResults.innerHTML = currentSign;
                         // update that the current sign was identofied by the user
-
                         showResults.innerHTML = 'You are correct'
-
-
+                        reward =3
+                        score.innerHTML = parseInt(reward)
                         submitSign('Mila')
                             .then(getCurrentSign('Mila'))
-
-
                     }
-
-                    console.log(showResults.innerHTML + "qqqqqqqqqq");
-
-                    //     const classPrediction =
-                    //         prediction[i].className + ": " + prediction[i].probability.toFixed(2);
                     labelContainer.innerHTML = classNameLabel;
-                    // }
                     // finally draw the poses
                     drawPose(pose);
                 }
+
                 function drawPose(pose) {
                     if (webcam.canvas) {
                         ctx.drawImage(webcam.canvas, 0, 0);
@@ -229,6 +209,9 @@
                     console.log('stoping');
                 }
             </script>
+
+
+
             <div class="allOptions">
                 <div class="option1">
 
@@ -253,14 +236,22 @@
     </ul>
     {{/each}}
 
+
+
     <div class="back1">
         <a href="/"> <button>Home</button></a>
     </div>
-    <form action="./level2" method="post">
 
-    </form>
+    <form action="./challenge" method="POST">
+        <div class="button">
+            <!-- <button type="submit" name="next">Next</button> -->
+        </div>
     </form>
 
+
+
+
+    </div>
 
 </body>
 

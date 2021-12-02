@@ -60,9 +60,14 @@ app.post('/challenge', async function(req, res) {
 })
 
 app.post('/submit/sign/:username', async function(req, res) {
-    const username = req.params.username;
+    try {
+        const username = req.params.username;
 
-    await pool.query(`update player set challenge_id = challenge_id + 1  where player_name = $1`, [username])
+        await pool.query(`update player set challenge_id = challenge_id + 1  where player_name = $1`, [username])
+    } catch (error) {
+
+    }
+
 
 })
 
@@ -70,13 +75,11 @@ app.get('/challenge/:username', async function(req, res) {
 
     try {
         const username = req.params.username;
-        const sql = `
-                    select challenge_name from player join challenge on challenge.id = player.challenge_id where player_name = $1 `
+        const sql = `select challenge_name from player join challenge on challenge.id = player.challenge_id where player_name = $1`
 
         // ? how do I execute my select query?
 
-        var result = await pool.query(`
-                    select challenge_name from player join challenge on challenge.id = player.challenge_id where player_name = $1 `, [username])
+        var result = await pool.query(`select challenge_name from player join challenge on challenge.id = player.challenge_id where player_name = $1`, [username])
 
         var challenge = result.rows[0].challenge_name;
         res.json({
