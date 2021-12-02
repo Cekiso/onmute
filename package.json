@@ -1,18 +1,28 @@
 {
-  "name": "Game-app",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "chalk": "^5.0.0",
-    "handlebars": "^4.7.7",
-    "nodemon": "^2.0.15",
-    "pg": "^8.7.1"
-  }
+    "name": "onmute",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "chalk": "^5.0.0",
+        "handlebars": "^4.7.7",
+        "nodemon": "^2.0.15",
+        "pg": "^8.7.1"
+    },
+    "devDependencies": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Cekiso/onmute.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Cekiso/onmute/issues"
+    },
+    "homepage": "https://github.com/Cekiso/onmute#readme",
+    "description": ""
 }
