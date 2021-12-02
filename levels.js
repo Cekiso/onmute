@@ -15,9 +15,14 @@ module.exports = function Onmute(pool) {
 
     }
     async function challenge() {
-        await pool.query(`select challenge_name from challenge where id=1;`);
-        // return challenge_name.rows;
-        return 'it working';
+        try {
+            await pool.query(`select challenge_name from challenge where id=1;`);
+            // return challenge_name.rows;
+            return 'it working';
+        } catch (error) {
+
+        }
+
     }
     //updating the level and points 
 
