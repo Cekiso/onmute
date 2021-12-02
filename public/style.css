@@ -1,38 +1,42 @@
 body {
-	background-color: lightseagreen;
-	color: whitesmoke;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: lightseagreen;
+    color: whitesmoke;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.container{
-	margin: auto;
-	width: 50%;
+.container {
+    margin: auto;
+    width: 50%;
     padding: 2em;
-	background-color: crimson;
-	text-align: center;
-	justify-content: center;
-	align-content: center;
-	border: solid black;
-	border-radius: 25%;
-	background-image: linear-gradient(rgba(6, 4, 110, 0.8),rgba(143, 163, 142, 0.8)),url(./—Pngtree—cool\ technology\ sense\ information\ technology_1046698.jpg);
-	}
-    .button  button{
-        width: 100px;
-        height: 50px;
-        background-color:whitesmoke;
-        border: 1px solid wheat;
-        color: black;
-        outline: none;
-        transition: .6s ease;
-        border-radius: 25px;
-    }
-    .button button:hover {
-        cursor: pointer;
-        background-color: rgb(238, 232, 221);
-        color: black;
-        box-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white;
-        font-weight: bold;
-    }
-    .startBTN{
-        padding: 2em;
-    }
+    background-color: crimson;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    border: solid black;
+    /* border-radius: 25%; */
+    /* background-image: linear-gradient(rgba(6, 4, 110, 0.8), rgba(143, 163, 142, 0.8)), url(./—Pngtree—cool\ technology\ sense\ information\ technology_1046698.jpg); */
+    background-image: img('.jpg');
+}
+
+.button button {
+    width: 100px;
+    height: 50px;
+    background-color: whitesmoke;
+    border: 1px solid wheat;
+    color: black;
+    outline: none;
+    transition: .6s ease;
+    border-radius: 25px;
+}
+
+.button button:hover {
+    cursor: pointer;
+    background-color: rgb(238, 232, 221);
+    color: black;
+    box-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white;
+    font-weight: bold;
+}
+
+.startBTN {
+    padding: 2em;
+}
