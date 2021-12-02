@@ -1,33 +1,30 @@
 {
     "name": "onmute",
     "version": "1.0.0",
+    "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js",
+        "start": "node.index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "body-parser": "^1.19.0",
-        "chalk": "^5.0.0",
-        "express": "^4.17.1",
-        "express-flash": "^0.0.2",
-        "express-handlebars": "^6.0.2",
-        "express-session": "^1.17.2",
-        "handlebars": "^4.7.7",
-        "nodemon": "^2.0.15",
-        "pg": "^8.7.1",
-        "pool": "^0.4.1"
     },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Cekiso/onmute.git"
     },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
     "bugs": {
         "url": "https://github.com/Cekiso/onmute/issues"
     },
     "homepage": "https://github.com/Cekiso/onmute#readme",
-    "description": ""
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "db-pool": "^0.1.2",
+        "express": "^4.17.1",
+        "express-handlebars": "^6.0.2",
+        "express-session": "^1.17.2",
+        "pg": "^8.7.1",
+        "pool": "^0.4.1"
+    }
 }

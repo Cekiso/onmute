@@ -60,7 +60,7 @@ app.post('/challenge', async function(req, res) {
 })
 
 
-app.get('/challenge/:username', function(req, res) {
+app.get('/challenge/:username', async function(req, res) {
 
     const username = req.params.username;
     const sql = `select challenge_name from player 
@@ -69,7 +69,7 @@ app.get('/challenge/:username', function(req, res) {
 
     // ? how do I execute my select query?
 
-    const result = await pool.query(`select challenge_name from player 
+    await pool.query(`select challenge_name from player 
 	               join challenge on challenge.id = player.challenge_id
 	               where player_name = $1`, [username])
 
