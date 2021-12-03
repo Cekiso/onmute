@@ -41,10 +41,11 @@
             margin: 9%;
         }
 
-        .allOptions {
+       .allOptions {
             display: flex;
-        }
+            justify-content: space-around;
 
+        }
         .back1 a button:hover {
         cursor: pointer;
         background-color: rgb(240, 99, 106);
@@ -75,6 +76,8 @@
         .hidden {
             display: none;
         }
+
+        
     </style>
 </head>
 <body>
@@ -233,26 +236,25 @@
                     await webcam.stop()
                     console.log('stoping');
                 }
-            </script>
+            </script><br>
 
 
 
-            <div class="allOptions">
+              <div class="allOptions">
                 <div class="option1">
-
+<img src="/img_20211203_101259_086.jpg" alt="">
 
 
                 </div>
                 <div class="option2">
 
-
+<img src="/Webp.net-resizeimage.jpg" alt="">
 
                 </div>
                 <div class="option3">
 
-
+<img src="/img_20211203_101259_086.jpg" alt="">
                 </div>
-        </form>
     </div>
 
     {{#each levels}}
