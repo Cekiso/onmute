@@ -73,8 +73,8 @@ app.post('/submit/sign/:username', async function(req, res) {
 
     }
 
-
 })
+
 
 
 app.get('/challenge/:username', async function(req, res) {

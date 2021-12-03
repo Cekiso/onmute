@@ -84,7 +84,7 @@
     <div class="overall">
         <h2>LEVEL3</h2>
         <form action="level3" method="POST">
-            <div class="question" name="question">Please show me <strong>Please</strong></div>
+            <div class="question" name="question">Please show me <strong>Sign</strong></div>
             <button type="button" onclick="init()" class="start">Start</button>
             {{!-- <button type="button" onclick="stop()" class="start">stop</button> --}}
 
@@ -107,7 +107,7 @@
                 // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
                 // the link to your model provided by Teachable Machine export panel
                 const URL = "https://teachablemachine.withgoogle.com/models/ujg-F0UkQ/";
-                let model, webcam, ctx, labelContainer, maxPredictions, showResults, button, score, over, badge;
+                let model, webcam, ctx, labelContainer, maxPredictions, showResults, button, score, over,images;
                 //let challengeElem = document.querySelector('.challenge')
                 //let currentSign
 
@@ -151,7 +151,7 @@
                     showResults = document.querySelector('.results')
                     button = document.querySelector('.button')
                     over = document.querySelector('.overall')
-                    badge = document.innerHTML('.trophy')
+                    images = document.querySelector('.trophy')
                     //for (let i = 0; i < maxPredictions; i++) { // and class labels
                     //  labelContainer.appendChild(document.createElement("div"));
                     // }
@@ -187,7 +187,7 @@
 
                     // get the max prediction
                     let maxPredi = 0;
-                    let classNameLabel ;
+                    let classNameLabel;
                     for (let props of prediction) {
                         if (props.probability > maxPredi) {
                             maxPredi = props.probability
@@ -209,11 +209,11 @@
                         //button.classList.remove('hidden')
                         reward = 'You have earned 9 PXs'
                         score.innerHTML = (reward)
-                   
-                            party.confetti(over, {
-                                shapes: ["square"]
-                            })
-                       
+                        
+                        party.confetti(over, {
+                            shapes: ["square"]
+                        })
+
                         stop()
                     }
                     labelContainer.innerHTML = classNameLabel;
@@ -266,6 +266,9 @@
             {{!-- <div class="trophy">
 
             </div> --}}
+            <div class="trophy hidden">
+                <img src="./badge.jpg" alt="badge">
+            </div>
 
             <div class="back1">
                 <a href="/"> <button>Home</button></a>
