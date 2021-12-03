@@ -28,17 +28,15 @@ const gaming = Game(pool);
 
 
 app.get('/', async function(req, res) {
-    res.render('index', {
-        question: await gaming.challenge()
-    })
+    res.render('index')
 
 });
 app.post('/level1', async function(req, res) {
-    var question = req.body.question;
-    await gaming.challenge()
+
+
 
     try {
-        res.render('level1', {})
+        res.render('level1')
 
     } catch (error) {
         console.log(error)
@@ -51,13 +49,20 @@ app.post('/level2', async function(req, res) {
         console.log(error)
     }
 })
-app.post('/challenge', async function(req, res) {
-    try {
-        res.render('challenge')
-    } catch (error) {
-        console.log(error)
-    }
-})
+app.post('/level3', async function(req, res) {
+        try {
+            res.render('level3')
+        } catch (error) {
+            console.log(error)
+        }
+    })
+    // app.post('1000/challenge', async function(req, res) {
+    //     try {
+    //         res.render('challenge')
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // })
 
 app.post('/submit/sign/:username', async function(req, res) {
     try {
@@ -70,6 +75,7 @@ app.post('/submit/sign/:username', async function(req, res) {
 
 
 })
+
 
 app.get('/challenge/:username', async function(req, res) {
 
@@ -95,15 +101,7 @@ app.get('/challenge/:username', async function(req, res) {
 
 
 
-
-
-
-
-
-
 const PORT = process.env.PORT || 4050;
 app.listen(PORT, function() {
-    console.log(`
-                    GameApp started on port $ { PORT }
-                    `)
+    console.log(`GameApp started on port $ { PORT }`)
 })

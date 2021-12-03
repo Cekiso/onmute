@@ -77,13 +77,11 @@
         }
     </style>
 </head>
-
-
 <body>
     <div class="overall">
-        <h2>LEVEL2</h2>
-        <form action="level2" method="POST">
-            <div class="question" name="question">Please show me <strong>More</strong></div>
+        <h2>LEVEL3</h2>
+        <form action="level3" method="POST">
+            <div class="question" name="question">Please show me <strong>Please</strong></div>
             <button type="button" onclick="init()" class="start">Start</button>
             {{!-- <button type="button" onclick="stop()" class="start">stop</button> --}}
 
@@ -92,7 +90,7 @@
             <div class="results"></div>
             <div class="points"></div>
             {{!-- <div class="button hidden">
-                <a href="./level3"> <button>Next</button></a>
+                <a href="./level2"> <button>Next</button></a>
             </div> --}}
             <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
             <script
@@ -106,7 +104,7 @@
                 // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
                 // the link to your model provided by Teachable Machine export panel
                 const URL = "https://teachablemachine.withgoogle.com/models/ujg-F0UkQ/";
-                let model, webcam, ctx, labelContainer, maxPredictions, showResults, button, score, over;
+                let model, webcam, ctx, labelContainer, maxPredictions, showResults, button, score, over, badge;
                 //let challengeElem = document.querySelector('.challenge')
                 //let currentSign
 
@@ -150,6 +148,7 @@
                     showResults = document.querySelector('.results')
                     button = document.querySelector('.button')
                     over = document.querySelector('.overall')
+                    badge = document.innerHTML('.trophy')
                     //for (let i = 0; i < maxPredictions; i++) { // and class labels
                     //  labelContainer.appendChild(document.createElement("div"));
                     // }
@@ -197,20 +196,21 @@
                         maxPredi,
                         classNameLabel
                     })
-                    if(classNameLabel != 'More' ){
+                    if (classNameLabel != 'Please') {
                         showResults.innerHTML = 'Please keep on trying'
                     }
-                    else if (classNameLabel === 'More' && maxPredi >= 0.88) {
+                    else if (classNameLabel === 'Please' && maxPredi >= 0.88) {
 
                         // update that the current sign was identofied by the user
-                        showResults.innerHTML = 'Well done!!🎉';
-                        button.classList.remove('hidden')
-                        reward = 'You have earned 6 PXs'
+                        showResults.innerHTML = 'You are correct🥳';
+                        //button.classList.remove('hidden')
+                        reward = 'You have earned 9 PXs'
                         score.innerHTML = (reward)
-
-                        party.confetti(over, {
-                            shapes: ["square"]
-                        })
+                        badge.innerHTML =
+                            party.confetti(over, {
+                                shapes: ["square"]
+                            })
+                        badge.innerHTML = ''
                         stop()
                     }
                     labelContainer.innerHTML = classNameLabel;
@@ -261,18 +261,20 @@
     </ul>
     {{/each}}
 
+    {{!-- <div class="trophy">
 
- <form action="./level3" method="POST">
-        <div class="button hidden">
-             <button type="submit" name="next">Next</button> 
-        </div>
-    </form>
+    </div> --}}
 
     <div class="back1">
         <a href="/"> <button>Home</button></a>
     </div>
 
-   
+    {{!-- <form action="./challenge" method="POST">
+        <div class="button hidden">
+            <button type="submit" name="next">Next</button>
+        </div>
+    </form> --}}
+
 
 
 

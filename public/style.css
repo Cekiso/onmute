@@ -1,24 +1,51 @@
 body {
-    background-color: lightseagreen;
-    color: whitesmoke;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(240, 99, 106);
+    font-family: 'Gorditas';
+    font-size: 22px;
 }
 
 .container {
     margin: auto;
     width: 50%;
     padding: 2em;
-    background-color: crimson;
+    background-color: white;
     text-align: center;
     justify-content: center;
     align-content: center;
     border: solid black;
-    /* border-radius: 25%; */
-    background-image: linear-gradient(rgba(247, 247, 252, 0.034), rgba(234, 240, 233, 0.014)), url(./Sign-Language.jpg);
-    background-repeat: no repeat;
+}
+
+.image {
+    display: flex;
+    border: white;
+    border-radius: 15%;
 }
 
 .button button {
+    width: 100px;
+    height: 50px;
+    background-color: rgb(240, 99, 106);
+    border: 1px solid wheat;
+    color: black;
+    outline: none;
+    transition: .6s ease;
+    border-radius: 25px;
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: rgb(240, 99, 106);
+    color: black;
+    box-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white;
+    font-weight: bold;
+}
+
+.player input {
+    height: 4vh;
+    width: 30vh;
+}
+
+.button {
     width: 100px;
     height: 50px;
     background-color: whitesmoke;
@@ -38,5 +65,5 @@ body {
 }
 
 .startBTN {
-    padding: 2em;
+    padding: 1em;
 }
